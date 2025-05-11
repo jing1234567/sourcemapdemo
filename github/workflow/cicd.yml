@@ -28,6 +28,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.DEPLOY_SECRET }}
-          commit_message: Update ghPages
-          force_orphan: true
+          BARNCH: gh-pages
           publish_dir: ./dist
