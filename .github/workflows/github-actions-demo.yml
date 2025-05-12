@@ -1,18 +1,33 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
+name: todoList 自动部署
+on:
+  push:
+    branches:
+      - main
 jobs:
-  Explore-GitHub-Actions:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
-        uses: actions/checkout@v4
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+      - uses: actions/checkout@v3  # 1. 检出代码
+
+      - uses: pnpm/action-setup@v2 # 2. 安装 pnpm
+        with:
+          version: '8.0.0'
+
+      - uses: actions/setup-node@v3 # 3. 安装 Node.js
+        with:
+          node-version: '18.x'
+
+      - name: Install Dependencies # 4. 安装依赖
+        run: pnpm install
+
+      - name: Build Project        # 5. 构建项目
+        run: pnpm run build
+
+      - name: Deploy to GitHub Pages # 6. 部署到 gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.DEPLOY_SECRET }}
+          publish_dir: ./dist
+          branch: gh-pages
+          publish_branch: gh-pages
+          
