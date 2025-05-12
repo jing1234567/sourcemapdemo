@@ -5,4 +5,10 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   base: './',
   plugins: [vue()],
+  build:{
+    sourcemap : true,
+   /*  rollupOptions:{
+      input: './public/index.html',
+    } */
+  }
 })

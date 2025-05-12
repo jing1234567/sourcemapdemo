@@ -7,19 +7,25 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
+      - uses: actions/checkout@v3  # 1. 检出代码
+
+      - uses: pnpm/action-setup@v2 # 2. 安装 pnpm
         with:
           version: '8.0.0'
-      - uses: actions/setup-node@v3
+
+      - uses: actions/setup-node@v3 # 3. 安装 Node.js
         with:
           node-version: '18.x'
-        run: npm install
-        run: npm run build
 
-      - name: action-Deploy
+      - name: Install Dependencies # 4. 安装依赖
+        run: pnpm install
+
+      - name: Build Project        # 5. 构建项目
+        run: pnpm run build
+
+      - name: Deploy to GitHub Pages # 6. 部署到 gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.DEPLOY_SECRET }}
-          BARNCH: gh-pages
           publish_dir: ./dist
+          branch: gh-pages
