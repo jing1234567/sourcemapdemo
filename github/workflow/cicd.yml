@@ -21,7 +21,7 @@ jobs:
         run: pnpm install
 
       - name: Build Project        # 5. 构建项目
-        run: pnpm run build
+        run: npm run build
 
       - name: Deploy to GitHub Pages # 6. 部署到 gh-pages
         uses: peaceiris/actions-gh-pages@v3
