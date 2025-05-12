@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
-let temNumber = null;
-temNumber.length = 1;
+/* let temNumber = null;
+temNumber.length = 1; */
 </script>
 
 <template>
