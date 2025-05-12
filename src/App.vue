@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
-
+let temNumber = null;
+temNumber.length = 1;
 </script>
 
 <template>
@@ -12,7 +13,7 @@ import HelloWorld from './components/HelloWorld.vue'
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
-  <HelloWorld msg="bella" />
+  <HelloWorld msg="Vite + Vue + bella" />
 </template>
 
 <style scoped>
